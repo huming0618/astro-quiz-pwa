@@ -1,0 +1,23 @@
+name: decode-icons
+on:
+  push:
+    branches: [main]
+    paths: ['icons/*.b64']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  decode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decode base64 icons to PNG and sync gh-pages
+        run: |
+          shopt -s nullglob
+          for f in icons/*.b64; do base64 -d "$f" > "${f%.b64}"; git rm -q "$f"; done
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add icons
+          git commit -m "Decode PNG icons" || echo "nothing to commit"
+          git push origin HEAD:main
+          git push -f origin HEAD:gh-pages
