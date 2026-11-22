@@ -1,0 +1,5 @@
+Made with Natural Earth. 1:110m land polygons, public domain.
+Data: https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_land.geojson
+Terms: https://www.naturalearthdata.com/about/terms-of-use/
+All versions of Natural Earth raster + vector map data found on that website are in the public domain.
+Downloaded 2026-11-22 (Asia/Shanghai). No online map API is used.

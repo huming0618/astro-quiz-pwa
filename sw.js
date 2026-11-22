@@ -1,4 +1,4 @@
-const CACHE = 'astro-quiz-v5-eclipse';
+const CACHE = 'astro-quiz-v6-eclipse-forecast';
 const ASSETS = [
   './',
   './index.html',

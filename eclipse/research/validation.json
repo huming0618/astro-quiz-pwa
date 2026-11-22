@@ -1,0 +1,86 @@
+{
+  "engine": "Astronomy Engine 2.1.19",
+  "calculation": "Contact times reconstructed symmetrically as peak +/- sd. Topocentric geometric altitude without refraction.",
+  "results": [
+    {
+      "dateCST": "2026-03-03",
+      "kind": "total",
+      "source": "https://eclipse.gsfc.nasa.gov/LEplot/LEplot2001/LE2026Mar03T.pdf",
+      "peakErrorMinutes": 0.054816666666666666,
+      "maxContactErrorMinutes": 0.6279628499348958,
+      "errors": {
+        "P1": {
+          "nasaCST": "2026-03-03 16:44",
+          "computedCST": "2026-03-03 16:44",
+          "errorMinutes": -0.3341868937174479
+        },
+        "U1": {
+          "nasaCST": "2026-03-03 17:50",
+          "computedCST": "2026-03-03 17:50",
+          "errorMinutes": -0.24789685872395834
+        },
+        "U2": {
+          "nasaCST": "2026-03-03 19:04",
+          "computedCST": "2026-03-03 19:04",
+          "errorMinutes": -0.4683295166015625
+        },
+        "MAX": {
+          "nasaCST": "2026-03-03 19:34",
+          "computedCST": "2026-03-03 19:34",
+          "errorMinutes": 0.054816666666666666
+        },
+        "U3": {
+          "nasaCST": "2026-03-03 20:03",
+          "computedCST": "2026-03-03 20:03",
+          "errorMinutes": 0.6279628499348958
+        },
+        "U4": {
+          "nasaCST": "2026-03-03 21:17",
+          "computedCST": "2026-03-03 21:18",
+          "errorMinutes": 0.42419685872395835
+        },
+        "P4": {
+          "nasaCST": "2026-03-03 22:23",
+          "computedCST": "2026-03-03 22:23",
+          "errorMinutes": 0.3271535603841146
+        }
+      }
+    },
+    {
+      "dateCST": "2026-08-28",
+      "kind": "partial",
+      "source": "https://eclipse.gsfc.nasa.gov/LEplot/LEplot2001/LE2026Aug28P.pdf",
+      "peakErrorMinutes": 0.0012666666666666666,
+      "maxContactErrorMinutes": 0.40356303304036456,
+      "errors": {
+        "P1": {
+          "nasaCST": "2026-08-28 09:24",
+          "computedCST": "2026-08-28 09:24",
+          "errorMinutes": -0.31663345947265625
+        },
+        "U1": {
+          "nasaCST": "2026-08-28 10:34",
+          "computedCST": "2026-08-28 10:33",
+          "errorMinutes": -0.40356303304036456
+        },
+        "MAX": {
+          "nasaCST": "2026-08-28 12:13",
+          "computedCST": "2026-08-28 12:13",
+          "errorMinutes": 0.0012666666666666666
+        },
+        "U4": {
+          "nasaCST": "2026-08-28 13:52",
+          "computedCST": "2026-08-28 13:52",
+          "errorMinutes": 0.3227630330403646
+        },
+        "P4": {
+          "nasaCST": "2026-08-28 15:02",
+          "computedCST": "2026-08-28 15:02",
+          "errorMinutes": 0.3525001261393229
+        }
+      }
+    }
+  ],
+  "maxAltitudeErrorDegrees": 6.062794710715025e-11,
+  "testGroups": 14
+}
