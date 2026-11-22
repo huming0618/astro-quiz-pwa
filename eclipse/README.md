@@ -65,3 +65,18 @@ node eclipse/tests/forecast-ui-smoke.test.mjs # Node DOM桩，实际事件流程
 默认2026-11-22后第一场为北京时间 **2027-02-21 07:13** 半影月食（分钟取整）。成都示例可覆盖约143分钟，到约07:35几何月落为止。实际月缘出现/消失、天空亮度等会不同。
 
 浏览器 QA 仍需：手机窄屏无横向溢出、原3D单指/双指操作；预报初次载入、示例全食/偏食/默认半影阶段缺失；日期搜索、4场选择/再找4场；接触按钮和时间滑块；地图点选和手动经纬；日界线/极区；验证表折叠；原448题答题功能。非浏览器测试不能代替实际渲染或真实手机触摸检查。
+
+## r7：旧页面缓存迁移（2026-11-22，北京时间）
+
+现象：浏览器仍显示旧3D页面；但独立HTTP检查 `/eclipse/`、`/eclipse/index.html`、带query与Cache-Control:no-cache请求均取得含forecast的20556字节HTML，SHA256一致，远端Pages为预报提交6efc5cf、gh-pages根目录且built。响应GitHub Pages设max-age=600，可能存在不同客户端/边缘缓存；不能仅凭box出口替另一个浏览器证明已刷新。
+
+代码中已证实的旧缓存缺陷：v4 worker对全部GET（包含HTML导航）优先`caches.match`返回旧副本，后台更新没有`event.waitUntil`保活；lesson页面又不主动注册/更新根worker，只有答题首页这样做。Node VM测试可复现服务器已返回forecast但同URL仍收到旧3D文档。`ignoreSearch`并未开启；旧worker对新query/新路径是cache miss。实际QA浏览器的active worker/响应来源仍须其开发者工具确认，不把推断写成已经读取过用户浏览器。
+
+修复：
+- 全新未缓存入口 `eclipse/forecast.html`，内容与index.html相同，标记data-build=20261122-r7，顶部可见“预报更新版 · r7”。原入口保留完整内容。
+- 每个lesson入口都加载update.mjs，显式注册/更新根worker，updateViaCache=none。旧controller替换后最多刷新一次该教学页，不刷新答题页，不访问/清除错题localStorage。
+- v7导航与lesson资源使用网络优先并以cache:no-cache重验证HTTP缓存；lesson不写CacheStorage，断网明确提示而不冒充旧预报。答题保留离线HTML/题库回退。
+- 清理只限astro-quiz-*旧cache，保留其他应用cache。初始化precaches用cache:reload。CSS/页面模块带release query；核心预报模块也有release query。
+- GitHub Pages的max-age由托管方控制，静态仓库不能自行保证各CDN边缘瞬时更新。全新路径用于迁移旧客户端；今后的构建应同步更新release标签并同步生成两个入口。
+
+`node eclipse/tests/cache.test.mjs` 回归覆盖旧缺陷、query/path逃离旧缓存、新策略、离线回退、cache清理范围和双入口一致。浏览器QA应先打开新forecast.html入口确认r7，再回原/eclipse/#forecast并确认active worker为v7；无需清站点数据，不能以清空localStorage解决缓存。

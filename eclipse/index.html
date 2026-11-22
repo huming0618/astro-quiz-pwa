@@ -1,13 +1,14 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-build="20261122-r7">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#080e1b"><meta name="description" content="用可触摸的 Three.js 地月模型，理解轨道倾斜、满月与月食。真实比例阴影判定，支持手机与投课。">
 <title>为什么不是每个月都有月食？ · 天文互动实验室</title>
-<link rel="icon" href="../icons/icon-192.png"><link rel="stylesheet" href="./styles.css">
+<link rel="icon" href="../icons/icon-192.png"><link rel="stylesheet" href="./styles.css?v=20261122-r7">
 </head>
 <body>
 <main class="shell">
+<div class="release-banner" role="status">预报更新版 · r7 <a href="./forecast.html#forecast">打开月食时刻与可见区计算 ↓</a></div>
 <header class="masthead"><a href="../" class="brand"><span class="brandmark" aria-hidden="true">◒</span>天文老师好<span class="divider">/</span><span class="muted">互动实验室</span></a><a class="back" href="../">返回答题 ↗</a></header>
 <section class="intro"><div><p class="eyebrow">ORBIT LAB <span>01 / 地月系统</span></p><h1>有满月，<br class="mobile-break">不一定有月食。</h1><p class="lead">关键是那 <strong>5.145°</strong> 的轨道倾角。<br class="mobile-break">转动模型，看月球怎样与地影擦肩而过。</p></div><div class="headline-note"><span>本次实验</span><b>让「满月」遇见「交点」</b><small>拖动 · 对比 · 发现</small></div></section>
 <nav class="lesson-nav" aria-label="实验分区"><a href="#teaching">01 轨道教学模型</a><a href="#forecast">02 真实日期预报 ↓</a><a href="#calculation-principles">03 计算原理</a></nav>
@@ -67,7 +68,8 @@
 <footer>天文老师好 <span>把天文原理，变成可以拨动的实验。</span><a href="../">继续答题 ↗</a></footer>
 </main>
 <noscript><p class="noscript">请开启 JavaScript 以使用互动模型。原理：月球轨道倾斜，只有满月靠近轨道交点时才可能进入地影。</p></noscript>
-<script type="module" src="./app.mjs"></script>
-<script type="module" src="./forecast.mjs"></script>
+<script type="module" src="./update.mjs?v=20261122-r7"></script>
+<script type="module" src="./app.mjs?v=20261122-r7"></script>
+<script type="module" src="./forecast.mjs?v=20261122-r7"></script>
 <script>window.setTimeout(function(){if(!window.eclipseReady){document.getElementById('fallback').hidden=false;}if(!window.eclipseForecastReady){document.getElementById('fc-loading').hidden=true;var error=document.getElementById('fc-error');error.hidden=false;error.textContent='预报计算未能载入。请刷新或检查网络；若仍失败，请通过下方 NASA 来源核对。';}},10000);</script>
 </body></html>

@@ -7,16 +7,16 @@ const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const app=fs.readFileSync(path.join(root,'app.mjs'),'utf8');
 const css=fs.readFileSync(path.join(root,'styles.css'),'utf8');
 let count=0;
-for(const name of ['app.mjs','vendor/OrbitControls.js','vendor/three.module.min.js','model.mjs','forecast.mjs','forecast-core.mjs','vendor/astronomy-engine.mjs']){
+for(const name of ['app.mjs','vendor/OrbitControls.js','vendor/three.module.min.js','model.mjs','forecast.mjs','forecast-core.mjs','update.mjs','vendor/astronomy-engine.mjs']){
  const source=fs.readFileSync(path.join(root,name),'utf8');
  for(const m of source.matchAll(/(?:\bfrom\s*|\bimport\s*)['"]([^'"]+)['"]/g)){
    assert.ok(m[1].startsWith('.'),`Unresolved bare or external import ${m[1]}`);
-   assert.ok(fs.existsSync(path.resolve(root,path.dirname(name),m[1])),`Missing import ${m[1]}`);count++;
+   assert.ok(fs.existsSync(path.resolve(root,path.dirname(name),m[1].split(/[?#]/)[0])),`Missing import ${m[1]}`);count++;
  }
 }
 for(const m of html.matchAll(/(?:src|href)="([^"#]+)"/g)){
  if(m[1].startsWith('https:'))continue;
- assert.ok(fs.existsSync(path.resolve(root,m[1])),`Missing resource ${m[1]}`);count++;
+ assert.ok(fs.existsSync(path.resolve(root,m[1].split(/[?#]/)[0])),`Missing resource ${m[1]}`);count++;
 }
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(ids).size,ids.length,'Duplicate IDs');
 const allApp=app+'\n'+fs.readFileSync(path.join(root,'forecast.mjs'),'utf8');

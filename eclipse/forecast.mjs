@@ -1,4 +1,4 @@
-import {findEvents,parseStartDate,validateLocation,kindLabel,worldFrame,gridAltitude,localSky,localCoverage,phaseAt,cst,utc} from './forecast-core.mjs';
+import {findEvents,parseStartDate,validateLocation,kindLabel,worldFrame,gridAltitude,localSky,localCoverage,phaseAt,cst,utc} from './forecast-core.mjs?v=20261122-r7';
 const $=id=>document.getElementById(id),canvas=$('fc-map'),ctx=canvas.getContext('2d');
 let events=[],index=0,selectedMs=0,location={lat:30.57,lon:104.07},coverage,land=null,mapTimer;
 const M={x:42,y:20,w:928,h:464};
