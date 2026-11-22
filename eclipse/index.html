@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080e1b"><meta name="description" content="用可触摸的 Three.js 地月模型，理解轨道倾斜、满月与月食。真实比例阴影判定，支持手机与投课。">
+<title>为什么不是每个月都有月食？ · 天文互动实验室</title>
+<link rel="icon" href="../icons/icon-192.png"><link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<main class="shell">
+<header class="masthead"><a href="../" class="brand"><span class="brandmark" aria-hidden="true">◒</span>天文老师好<span class="divider">/</span><span class="muted">互动实验室</span></a><a class="back" href="../">返回答题 ↗</a></header>
+<section class="intro"><div><p class="eyebrow">ORBIT LAB <span>01 / 地月系统</span></p><h1>有满月，<br class="mobile-break">不一定有月食。</h1><p class="lead">关键是那 <strong>5.145°</strong> 的轨道倾角。<br class="mobile-break">转动模型，看月球怎样与地影擦肩而过。</p></div><div class="headline-note"><span>本次实验</span><b>让「满月」遇见「交点」</b><small>拖动 · 对比 · 发现</small></div></section>
+<div class="lab">
+<section class="visual" aria-label="交互三维模型与阴影截面">
+<div class="stage" id="stage">
+<div class="scene-top"><span class="live-dot"></span> 地心视角 <span class="scene-note">距离与半径按比例</span></div>
+<div id="scene" role="img" aria-label="可旋转缩放的地月轨道模型；文字状态与右侧滑块提供等价操作"></div>
+<div id="labels" aria-hidden="true"><span id="label-earth" class="label earth-label">地球</span><span id="label-moon" class="label moon-label">月球</span><span id="label-n1" class="label node-label">升交点</span><span id="label-n2" class="label node-label">降交点</span><span id="label-sun" class="label sun-label">来自太阳的光 →</span></div>
+<div class="view-controls" role="group" aria-label="观察视角"><button data-view="oblique" aria-pressed="true">立体</button><button data-view="side" aria-pressed="false">侧视</button><button data-view="top" aria-pressed="false">俯视</button><button data-view="shadow" aria-pressed="false">沿地影看</button></div>
+<p class="gesture">单指 / 鼠标拖动旋转 · 双指 / 滚轮缩放</p>
+<div id="fallback" class="fallback" hidden><h2>三维画面暂不可用</h2><p>请使用支持 WebGL 的较新浏览器，或开启硬件加速后刷新。下方的阴影截面、滑块与教学说明仍可使用。</p></div>
+</div>
+<div class="legend" aria-label="模型图例"><span><i class="cyan"></i>月球轨道</span><span><i class="blue"></i>黄道面</span><span><i class="amber"></i>交点线</span><span><i class="red"></i>本影</span><span><i class="purple"></i>半影</span></div>
+<div class="shadow-card"><div class="cross-wrap"><canvas id="cross" width="380" height="300" role="img" aria-label="沿地影轴观察的月球与影子截面"></canvas><span class="diagram-caption">阴影横截面 · 自动缩放</span></div><div class="shadow-copy"><p class="eyebrow">看月球有没有碰到影子</p><h2 id="shadow-title">错过地球的影子</h2><p id="shadow-desc">正在计算…</p><div class="metrics"><div><span>月心到地影轴</span><b id="distance">—</b></div><div><span>本影半径（此处）</span><b id="umbra">—</b></div></div><small>R⊕ 表示地球半径。截面中月球与影子采用相同比例；此图不是地面所见的月面。</small></div></div>
+</section>
+<aside class="panel" aria-label="实验控制">
+<div class="panel-heading"><span class="eyebrow">动手试一试</span><button id="reset" class="text-button">↺ 复位</button></div>
+<h2>同样是满月，结果呢？</h2>
+<div class="presets"><button data-preset="ordinary" class="preset active" aria-pressed="true"><span>01</span><div><b>普通满月</b><small>离交点远，越过地影上方</small></div><span class="preset-arrow">↗</span></button><button data-preset="eclipse" class="preset" aria-pressed="false"><span>02</span><div><b>月食满月</b><small>在交点附近，进入地影</small></div><span class="preset-arrow">↗</span></button><button data-preset="flat" class="preset" aria-pressed="false"><span>03</span><div><b>假如没有倾角？</b><small>将倾角设为 0°，再播放</small></div><span class="preset-arrow">↗</span></button></div>
+<div class="status-box" id="status-box" data-state="none"><div><span id="status-label">满月 · 无月食</span><span class="status-icon" aria-hidden="true">◐</span></div><p id="status-description" aria-live="polite">满月只是条件之一，还要靠近交点。</p></div>
+<div class="slider-block"><div class="control-label"><label for="annual">地球绕日位置</label><output id="annual-value" for="annual">90°</output></div><input id="annual" type="range" min="0" max="360" value="90" step="0.1"><div class="range-labels"><span>交点方向 0°</span><span>180°</span><span>360°</span></div><label class="check"><input id="lock-full" type="checkbox" checked>拖动此滑块时，把月球放在满月位置</label><p class="control-help">地影随之转向；月球轨道的交点线保持固定。</p></div>
+<div class="slider-block"><div class="control-label"><label for="orbital">月球轨道位置</label><output id="orbital-value" for="orbital">90°</output></div><input id="orbital" type="range" min="0" max="360" value="90" step="0.1"><div class="range-labels"><span>升交点 0°</span><span>降交点 180°</span><span>360°</span></div><div class="phase-line"><span id="phase">满月位置</span><button id="to-full" class="text-button">移到满月 →</button></div></div>
+<div class="inclination-row"><label for="flat">轨道倾角 <strong id="inclination">5.145°</strong></label><label class="check"><input id="flat" type="checkbox">设为 0°</label></div>
+<div class="play-row"><button id="play" class="primary" aria-pressed="false">▶ 播放运行</button><button id="step-month" class="secondary">下一个满月</button></div><p class="play-note" id="play-note">播放时同时推进月球绕地、地球绕日：约 1 秒 = 2 天。</p>
+</aside>
+</div>
+<section class="explanation" aria-label="原理说明"><div class="explanation-heading"><p class="eyebrow">THE BIG IDEA</p><h2>月食需要两个条件，同时成立。</h2></div><div class="learn-grid"><article><span class="step-number">01</span><h3>先是满月</h3><p>月球位于地球背向太阳的一侧。太阳、地球、月球在天空中的方向接近排成一直线，但还可能有上下偏差。</p></article><article><span class="step-number">02</span><h3>还要靠近交点</h3><p>月球轨道相对黄道面倾斜约 5.145°。地月相距约 60.3 个地球半径，这一点倾斜就能让满月偏离地影轴约 5.4 个地球半径。</p></article><article><span class="step-number">03</span><h3>于是出现「蚀季」</h3><p>太阳方向约每半年经过交点线附近，形成可能发生日月食的蚀季。但蚀季不保证一定出现本影月食，还取决于满月时刻与交点的距离。</p></article></div></section>
+<details class="model-notes"><summary>模型比例、边界与资料</summary><div><p>地球半径 = 1，月球半径 = 0.273，地月距离 = 60.3；太阳半径 = 109.1，日地距离 = 23455。太阳在画外，以箭头标示光线方向。本影向背太阳方向逐渐收窄；月球距离处本影半径约 0.72、半影半径约 1.28。</p><p>主场景球体、轨道与阴影按上述比例。月球旁的光圈、文字、交点圆环、线宽仅是定位标记，不代表天体尺寸。蓝色圆盘仅帮助识别黄道面。横截面独立自动缩放，月球与影子之间仍保持比例。</p><p>采用圆轨道、平均倾角与固定交点，忽略偏心率、交点约 18.6 年的退行、视差及大气折射。月食类型用球面横截面的近似圆盘重叠判定，不是星历或真实月食日期预报。「下一个满月」推进到下一次黄经差 180° 的模型时刻；「移到满月」仅改变月球位置以便比较。</p><p>参考：<a href="https://science.nasa.gov/moon/eclipses/" target="_blank" rel="noopener noreferrer">NASA · Eclipses</a>；<a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html" target="_blank" rel="noopener noreferrer">NASA · Moon Fact Sheet</a>。渲染使用本地托管 <a href="./vendor/LICENSE.three.txt">Three.js r170（MIT）</a>，无外部图片或 CDN 运行依赖。</p></div></details>
+<footer>天文老师好 <span>把天文原理，变成可以拨动的实验。</span><a href="../">继续答题 ↗</a></footer>
+</main>
+<noscript><p class="noscript">请开启 JavaScript 以使用互动模型。原理：月球轨道倾斜，只有满月靠近轨道交点时才可能进入地影。</p></noscript>
+<script type="module" src="./app.mjs"></script>
+<script>window.setTimeout(function(){if(!window.eclipseReady){document.getElementById('fallback').hidden=false;}},10000);</script>
+</body></html>

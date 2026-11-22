@@ -1,4 +1,4 @@
-const CACHE = 'astro-quiz-v4';
+const CACHE = 'astro-quiz-v5-eclipse';
 const ASSETS = [
   './',
   './index.html',
@@ -27,6 +27,8 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
+  // Standalone science lesson bypasses the quiz cache; quiz offline behavior is unchanged.
+  if (new URL(req.url).pathname.includes('/eclipse/')) return;
   event.respondWith(
     caches.match(req).then((cached) => {
       const fetched = fetch(req).then((res) => {
