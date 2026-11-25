@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN" data-build="20261125-s1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080e1b">
+<meta name="description" content="用可触摸的 WebGL 演示神舟二十四号从酒泉点火到对接天宫空间站的行程。官方事实与教学示意分开标注。">
+<title>神舟二十四号发射与对接 · 天文互动实验室</title>
+<link rel="icon" href="../icons/icon-192.png">
+<link rel="stylesheet" href="./styles.css?v=20261125-s1">
+</head>
+<body>
+<main class="shell">
+  <div class="release-banner" role="status">神舟二十四号飞行演示 · s1 <a href="../eclipse/forecast.html">月食实验室 ↗</a></div>
+  <header class="masthead">
+    <a href="../" class="brand"><span class="brandmark" aria-hidden="true">◈</span>天文老师好<span class="divider">/</span><span class="muted">互动实验室</span></a>
+    <a class="back" href="../">返回答题 ↗</a>
+  </header>
+
+  <section class="intro">
+    <div>
+      <p class="eyebrow">ORBIT LAB <span>02 / 载人飞行</span></p>
+      <h1>从酒泉到天宫，<br class="mobile-break">三个半小时的追近。</h1>
+      <p class="lead">北京时间 2026 年 11 月 25 日 <strong>08:18</strong>，神舟二十四号在酒泉卫星发射中心点火，入轨后优先采用 <strong>3.5 小时</strong>自主快速交会对接，停靠天和核心舱<strong>前向端口</strong>。转动地球，跟着火箭和飞船走完全程。</p>
+    </div>
+    <div class="headline-note">
+      <span>本次演示</span>
+      <b>发射段用同型通常时序<br>交会段是教学示意</b>
+      <small>拖动 · 倍速 · 切近景</small>
+    </div>
+  </section>
+
+  <p class="disclaimer"><strong>请先分清三类信息：</strong>发射时刻、乘组、3.5 小时策略和对接端口来自官方公布；逃逸塔、助推器、整流罩、船箭分离的秒数取长征二号 F 同型火箭通常时序（如神舟十四号主任设计师常武权的公开介绍），不是本次正式公报的精确秒数；入轨后的多圈过渡、径向绕飞和前向逼近是教学示意，不是飞控弹道。空间站高度取约 400 公里量级，不要把它写成天宫二号曾用的 393 公里，也不要把天宫二号和现在的天宫空间站当成同一个目标。</p>
+
+  <div class="lab">
+    <section class="visual" aria-label="神舟二十四号发射与对接三维演示">
+      <div class="stage" id="stage">
+        <div class="hud">
+          <div class="hud-block">
+            <div class="hud-clock" id="hudClock">2026-11-25 08:18:00</div>
+            <small id="hudT">T+0:00 · 北京时间</small>
+          </div>
+          <div class="hud-block hud-metrics">
+            <div><b id="hudAlt">1.1 km</b><span>高度 <i id="altNote"></i></span></div>
+            <div><b id="hudVel">0.36 km/s</b><span>地心惯性速度</span></div>
+            <div><b id="hudRange">—</b><span id="hudRangeLabel">与天宫距离（示意）</span></div>
+          </div>
+        </div>
+        <div id="scene" role="img" aria-label="可旋转缩放的地球、火箭与空间站模型；单指旋转，双指缩放。右侧时序与按钮提供等价操作。"></div>
+        <div id="labels" aria-hidden="true">
+          <span id="label-jiuquan" class="label jiuquan">酒泉</span>
+          <span id="label-chengdu" class="label chengdu">成都</span>
+          <span id="label-craft" class="label craft">神舟二十四号</span>
+          <span id="label-station" class="label station">天宫空间站</span>
+        </div>
+        <div class="view-controls" role="group" aria-label="观察视角">
+          <button type="button" data-view="pad" aria-pressed="true">发射场</button>
+          <button type="button" data-view="follow" aria-pressed="false">跟随</button>
+          <button type="button" data-view="global" aria-pressed="false">全局轨道</button>
+          <button type="button" data-view="dock" aria-pressed="false">对接近景</button>
+        </div>
+        <p class="gesture">单指 / 鼠标拖动旋转 · 双指 / 滚轮缩放 · 播放中仍可手动观察</p>
+        <div id="fallback" class="fallback" hidden>
+          <h2>三维画面暂不可用</h2>
+          <p>请使用支持 WebGL 的较新浏览器，或开启硬件加速后刷新。下方的时序轴、数值与原理说明仍可使用。</p>
+        </div>
+      </div>
+      <div class="legend" aria-label="图例">
+        <span><i class="amber"></i>上升轨迹</span>
+        <span><i class="cyan"></i>飞船示意路径</span>
+        <span><i class="gold"></i>空间站轨道（约 400 km / 41.5°）</span>
+        <span><i class="blue"></i>地面轨迹</span>
+      </div>
+      <div class="transport">
+        <div class="transport-row">
+          <button type="button" id="playBtn" aria-pressed="false">播放</button>
+          <button type="button" id="nowBtn">此刻</button>
+          <label class="muted" for="speedSelect">倍速</label>
+          <select id="speedSelect" aria-label="播放倍速">
+            <option value="auto" selected>自适应（推荐）</option>
+            <option value="10">10×</option>
+            <option value="30">30×</option>
+            <option value="120">120×</option>
+            <option value="600">600×</option>
+          </select>
+          <div class="scrub">
+            <input id="scrub" type="range" min="0" max="12720" value="0" step="1" aria-label="飞行时间轴">
+          </div>
+        </div>
+        <div class="phase-buttons" role="group" aria-label="跳转到阶段">
+          <button type="button" data-phase="0">起飞</button>
+          <button type="button" data-phase="120">抛塔</button>
+          <button type="button" data-phase="585">入轨</button>
+          <button type="button" data-phase="10800">绕飞</button>
+          <button type="button" data-phase="11700">前向逼近</button>
+          <button type="button" data-phase="12600">对接</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <h2>飞行时序</h2>
+      <ul class="event-list" id="eventList"></ul>
+      <div class="event-detail" id="eventDetail"></div>
+      <p class="crew">乘组：<b>汤洪波</b>（指令长）、<b>武毅</b>、巴基斯坦航天员 <b>穆罕默德·齐尚·阿里</b>。出征仪式于 5:28 在问天阁举行。发射前公布的组合体状态：天舟十号在后向、神舟二十三号在径向；神舟二十四号计划停靠前向，形成三船三舱组合体。</p>
+    </aside>
+  </div>
+
+  <section class="principles" id="principles">
+    <div>
+      <h2>原理与模型说明</h2>
+      <p class="lead">这页把地球、火箭和空间站放在同一个惯性画面里：星星几乎不动，地球在转，空间站轨道面几乎固定，地面轨迹则在地球表面上移动。</p>
+    </div>
+    <div class="facts">
+      <article class="fact">
+        <h3>为什么是朝东北、又不是 45°</h3>
+        <p>酒泉大约在 41°N，天宫轨道倾角约 41°–42°。从纬度 φ 发射、要进入倾角 i 的轨道，发射方位大约满足 cos i = cos φ · sin Az（Az 从正北起算）。演示取 41.5°，算出的方位大约是东偏北 7°–10°（约 83°），常被口语说成“朝东北飞”。并不是沿 45° 斜线飞向东北。</p>
+      </article>
+      <article class="fact">
+        <h3>3.5 小时怎么追上空间站</h3>
+        <p>空间站在约 400 公里高度，周期大约 92 分钟。飞船先进入较低的过渡轨道，周期更短，于是逐步从后方追上。本页用“先落后约 18°、再多圈抬轨、径向停泊、绕到前向、沿 V-bar 逼近、接触并拉拢锁紧”来示意，没有使用官方脉冲表。</p>
+      </article>
+      <article class="fact">
+        <h3>前向端口在哪里</h3>
+        <p>天和核心舱前向端口朝飞行方向（+V-bar）。后向是天舟十号，径向（对地）是神舟二十三号——这是发射前公布的组合体状态。近景里可以转到对接面，看神舟二十四号沿前向靠近。舱段左右舷和太阳翼为外形示意。</p>
+      </article>
+      <article class="fact">
+        <h3>黎明发射的地球</h3>
+        <p>08:18 是北京时间清晨。酒泉大约在日出前后，成都的太阳已经升起一截。画面里的晨昏线按太阳位置估算，用来帮助认方向，不是天气预报。地球半径取 6371 公里的平均球面；陆地轮廓来自 Natural Earth，没有在线地图接口。</p>
+      </article>
+      <article class="fact">
+        <h3>比例与速度</h3>
+        <p>地球和轨道高度按比例。全球视图里火箭、飞船和空间站被放大，否则只有几十米的飞行器在地球旁边看不见。近景改为按舱段示意的米级比例。高度、速度为模型计算值；交会距离在入轨后属于示意，已在界面标注。</p>
+      </article>
+      <article class="fact">
+        <h3>精确时刻以飞控为准</h3>
+        <p>本页把 3.5 小时策略落实为 11:48 接触、11:50 锁紧，只为对齐“约 11:50 前后”这句话。条件变化时可能改用备份交会方案。点火之后的入轨、对接正式时刻，以北京航天飞行控制中心公布为准。</p>
+      </article>
+    </div>
+    <div class="sources">
+      <p>主要依据：中国载人航天工程网 2026 年 11 月 24 日新闻发布会（发射时间、乘组、3.5 小时自主快速交会对接、天和前向端口、三船三舱）；新华社 2026 年 11 月 25 日点火快讯；中国载人航天工程网出征仪式报道（5:28 出征）。上升段节点取航天科技集团一院长征二号 F 主任设计师常武权在神舟十四号任务中的公开介绍（120 秒抛逃逸塔、152 秒抛助推器、156 秒一二级分离、210 秒抛整流罩、585 秒船箭分离），并与公开报道中“有塔逃逸约至 39 公里”相互参照。其他公开时序表可能有数秒差异。空间站倾角与高度为公开常见量级，不是本次测轨根数。</p>
+      <p><a href="../">返回答题首页</a> · <a href="../eclipse/">月食轨道实验室</a></p>
+    </div>
+  </section>
+</main>
+<script type="module" src="./update.mjs?v=20261125-s1"></script>
+<script type="module" src="./app.mjs?v=20261125-s1"></script>
+</body>
+</html>
