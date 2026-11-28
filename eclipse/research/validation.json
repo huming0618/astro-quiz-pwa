@@ -1,6 +1,6 @@
 {
   "engine": "Astronomy Engine 2.1.19",
-  "calculation": "Contact times reconstructed symmetrically as peak +/- sd. Topocentric geometric altitude without refraction.",
+  "calculation": "Lunar contact times reconstructed symmetrically as peak +/- sd. Solar greatest-eclipse times from SearchGlobalSolarEclipse. Topocentric geometric altitude without refraction. Local solar contacts from disk geometry.",
   "results": [
     {
       "dateCST": "2026-03-03",
@@ -81,6 +81,38 @@
       }
     }
   ],
+  "solarResults": [
+    {
+      "body": "solar",
+      "dateCST": "2026-08-13",
+      "kind": "total",
+      "source": "https://eclipse.gsfc.nasa.gov/SEbeselm/SEbeselm2001/SE2026Aug12Tbeselm.html",
+      "peakErrorMinutes": -0.11676666666666667,
+      "maxContactErrorMinutes": null,
+      "nasaUT": "2026-08-12T17:45:53.800Z",
+      "computedUTC": "2026-08-12T17:45:46.794Z"
+    },
+    {
+      "body": "solar",
+      "dateCST": "2020-06-21",
+      "kind": "annular",
+      "source": "https://eclipse.gsfc.nasa.gov/SEbeselm/SEbeselm2001/SE2020Jun21Abeselm.html",
+      "peakErrorMinutes": -0.036533333333333334,
+      "maxContactErrorMinutes": null,
+      "nasaUT": "2020-06-21T06:40:06.000Z",
+      "computedUTC": "2020-06-21T06:40:03.808Z"
+    },
+    {
+      "body": "solar",
+      "dateCST": "2026-02-17",
+      "kind": "annular",
+      "source": "https://eclipse.gsfc.nasa.gov/SEbeselm/SEbeselm2001/SE2026Feb17Abeselm.html",
+      "peakErrorMinutes": -0.002683333333333333,
+      "maxContactErrorMinutes": null,
+      "nasaUT": "2026-02-17T12:11:54.100Z",
+      "computedUTC": "2026-02-17T12:11:53.939Z"
+    }
+  ],
   "maxAltitudeErrorDegrees": 6.062794710715025e-11,
-  "testGroups": 14
+  "testGroups": 20
 }

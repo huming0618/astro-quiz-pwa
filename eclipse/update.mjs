@@ -1,5 +1,5 @@
 // Loaded by every lesson entry, not only by the quiz home page.
-const build='20261122-r7',root=new URL('../',import.meta.url);
+const build='20261128-r8',root=new URL('../',import.meta.url);
 const previous=navigator.serviceWorker?.controller;
 let reloading=false;
 if('serviceWorker' in navigator){

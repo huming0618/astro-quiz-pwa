@@ -1,7 +1,59 @@
 {
-  "note": "Transcribed from the UT labels of NASA GSFC / Fred Espenak contact-sheet PDFs, visually read after rendering the source PDFs. Do not use the TD greatest-eclipse column as UTC. Source PDFs use UT; Astronomy Engine approximates UT1 and UTC as identical.",
+  "note": "Lunar contact times transcribed from the UT labels of NASA GSFC / Fred Espenak contact-sheet PDFs, visually read after rendering the source PDFs. Do not use the TD greatest-eclipse column as UTC. Solar greatest-eclipse instants are the UT values printed on the NASA GSFC / Espenak Besselian-elements pages cited below. Source pages use UT; Astronomy Engine approximates UT1 and UTC as identical.",
   "references": [
-    {"date":"2026-03-03","start":"2026-03-01","kind":"total","source":"https://eclipse.gsfc.nasa.gov/LEplot/LEplot2001/LE2026Mar03T.pdf","contactsUTC":{"P1":"2026-03-03T08:44:22Z","U1":"2026-03-03T09:50:00Z","U2":"2026-03-03T11:04:26Z","MAX":"2026-03-03T11:33:37Z","U3":"2026-03-03T12:02:45Z","U4":"2026-03-03T13:17:10Z","P4":"2026-03-03T14:22:59Z"}},
-    {"date":"2026-08-28","start":"2026-08-01","kind":"partial","source":"https://eclipse.gsfc.nasa.gov/LEplot/LEplot2001/LE2026Aug28P.pdf","contactsUTC":{"P1":"2026-08-28T01:23:55Z","U1":"2026-08-28T02:33:48Z","MAX":"2026-08-28T04:12:49Z","U4":"2026-08-28T05:51:55Z","P4":"2026-08-28T07:01:41Z"}}
+    {
+      "date": "2026-03-03",
+      "start": "2026-03-01",
+      "kind": "total",
+      "source": "https://eclipse.gsfc.nasa.gov/LEplot/LEplot2001/LE2026Mar03T.pdf",
+      "contactsUTC": {
+        "P1": "2026-03-03T08:44:22Z",
+        "U1": "2026-03-03T09:50:00Z",
+        "U2": "2026-03-03T11:04:26Z",
+        "MAX": "2026-03-03T11:33:37Z",
+        "U3": "2026-03-03T12:02:45Z",
+        "U4": "2026-03-03T13:17:10Z",
+        "P4": "2026-03-03T14:22:59Z"
+      }
+    },
+    {
+      "date": "2026-08-28",
+      "start": "2026-08-01",
+      "kind": "partial",
+      "source": "https://eclipse.gsfc.nasa.gov/LEplot/LEplot2001/LE2026Aug28P.pdf",
+      "contactsUTC": {
+        "P1": "2026-08-28T01:23:55Z",
+        "U1": "2026-08-28T02:33:48Z",
+        "MAX": "2026-08-28T04:12:49Z",
+        "U4": "2026-08-28T05:51:55Z",
+        "P4": "2026-08-28T07:01:41Z"
+      }
+    }
+  ],
+  "solarReferences": [
+    {
+      "date": "2026-08-12",
+      "start": "2026-08-10",
+      "kind": "total",
+      "peakUTC": "2026-08-12T17:45:53.800Z",
+      "source": "https://eclipse.gsfc.nasa.gov/SEbeselm/SEbeselm2001/SE2026Aug12Tbeselm.html",
+      "note": "Instant of Greatest Eclipse = 17:45:53.8 UT from the Besselian elements page (ΔT = 71.4 s). Beijing date is 2026-08-13."
+    },
+    {
+      "date": "2020-06-21",
+      "start": "2020-06-20",
+      "kind": "annular",
+      "peakUTC": "2020-06-21T06:40:06.000Z",
+      "source": "https://eclipse.gsfc.nasa.gov/SEbeselm/SEbeselm2001/SE2020Jun21Abeselm.html",
+      "note": "Instant of Greatest Eclipse = 06:40:06.0 UT from the Besselian elements page (ΔT = 69.4 s)."
+    },
+    {
+      "date": "2026-02-17",
+      "start": "2026-02-16",
+      "kind": "annular",
+      "peakUTC": "2026-02-17T12:11:54.100Z",
+      "source": "https://eclipse.gsfc.nasa.gov/SEbeselm/SEbeselm2001/SE2026Feb17Abeselm.html",
+      "note": "Instant of Greatest Eclipse = 12:11:54.1 UT from the Besselian elements page (ΔT = 71.2 s)."
+    }
   ]
 }

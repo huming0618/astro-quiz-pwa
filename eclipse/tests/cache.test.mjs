@@ -22,5 +22,5 @@ await online.activate();assert.ok(!online.stores.has('astro-quiz-v4'));assert.ok
 await online.install();assert.ok(online.calls.filter(c=>c.cache==='reload').length===8);
 assert.doesNotMatch(fresh,/\blocalStorage\s*\./);
 const index=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8'),alternate=fs.readFileSync(new URL('../forecast.html',import.meta.url),'utf8');
-assert.equal(index,alternate);assert.match(index,/data-build="20261122-r7"/);assert.match(index,/update\.mjs\?v=20261122-r7/);assert.match(index,/styles\.css\?v=20261122-r7/);
+assert.equal(index,alternate);assert.match(index,/data-build="20261128-r8"/);assert.match(index,/update\.mjs\?v=20261128-r8/);assert.match(index,/styles\.css\?v=20261128-r8/);
 console.log('PASS cache regression: reproduced legacy stale navigation, query/path miss escapes it, new online navigation revalidates, offline lesson does not lie, quiz offline retained, cache deletion scope-limited, both release entries identical.');
